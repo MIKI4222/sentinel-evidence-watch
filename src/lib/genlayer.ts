@@ -3,7 +3,7 @@ import {studioDevnet} from 'genlayer-js/chains';
 import {TransactionHashVariant} from 'genlayer-js/types';
 import {parseAccount} from 'viem/accounts';
 import type {Provider,Source,Baseline,RecordView,Integration,Snapshot} from './types';
-export const CONTRACT=(import.meta.env.VITE_GENLAYER_CONTRACT_ADDRESS||'0x402af6154B9D64635e2c32FEB9f07D4A492532F4') as `0x${string}`;
+export const CONTRACT=(import.meta.env.VITE_GENLAYER_CONTRACT_ADDRESS||'0xe377EBA9359CA71Ad64D4BB65e5BC0Ff897aC3D8') as `0x${string}`;
 export const EXPLORER=import.meta.env.VITE_GENLAYER_EXPLORER_URL||'https://explorer-studio-next.genlayer.com';
 export const RPC='https://studio-dev.genlayer.com/api'; export const CHAIN=61997;
 export const readClient=createClient({chain:studioDevnet});
