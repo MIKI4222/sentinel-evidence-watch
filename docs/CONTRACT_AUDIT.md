@@ -1,4 +1,15 @@
-# SENTINEL — Contract audit (phase 1)
+# SENTINEL — Contract audit
+
+## Current deployment
+
+- Intended EvidenceWatch contract: `0xe377EBA9359CA71Ad64D4BB65e5BC0Ff897aC3D8` on Studio Dev / Studio Next, chain ID 61997 (`0xf22d`), RPC `https://studio-dev.genlayer.com/api`. Explorer: https://explorer-studio-next.genlayer.com/address/0xe377EBA9359CA71Ad64D4BB65e5BC0Ff897aC3D8
+- The runtime fallback, `.env.example` and README use this address. An explicitly set `VITE_GENLAYER_CONTRACT_ADDRESS` overrides the fallback; if set in Netlify, update or remove it and trigger a new build. Both contract reads and wallet writes use the same `CONTRACT` value.
+- Read-only RPC checks returned the deployed code, the twelve-method schema and `get_source_count = 0` at the time of rechecking. The retrieved code matched the application's bundled `contract/evidence_watch.py` after line-ending normalization. Source counts and availability can change on this resettable network.
+- No write, wallet fee estimation or end-to-end consensus was performed for this deployment. Historical records from the earlier deployment are not available merely because the address changed.
+
+## Historical audit of the previous deployment (phase 1)
+
+The audit and transaction observations below describe a previous deployment, not the current address above.
 
 Audit time: 2026-11-14 UTC. Status: **deployment, source, schema and public reads verified; required repository documentation and tests unavailable. Implementation not started.** Network state can change, especially after a Studio Dev reset.
 
@@ -6,7 +17,7 @@ Audit time: 2026-11-14 UTC. Status: **deployment, source, schema and public read
 
 - Repository: https://github.com/MIKI4222/evidence-watch-genlayer, `main`, commit `5f6031598f841677a27d2e14fc640cf90fc6fa79`.
 - The actual checkout contains only `README.md` and `evidence_watch.py` at the root (apart from `.git`). The README refers to `contracts/evidence_watch.py`, five files under `docs/`, `tests/`, and LICENSE, none of which were present in this checkout. The contract source was read from the root. The cited documentation and tests could not be reviewed or run; the README's claim of 83 simulation tests is not an independently verified result.
-- Address: `0x402af6154B9D64635e2c32FEB9f07D4A492532F4`. Network: GenLayer Studio Dev. Canonical RPC: `https://studio-dev.genlayer.com/api`. `eth_chainId` returned `0xf22d` (61997).
+- Historical address: `0x402af6154B9D64635e2c32FEB9f07D4A492532F4`. Network: GenLayer Studio Dev. Canonical RPC: `https://studio-dev.genlayer.com/api`. `eth_chainId` returned `0xf22d` (61997).
 - Installed `genlayer-js@2.0.0-rc.3` for inspection. Its `studioDevnet` preset returned chain 61997 and the canonical RPC. `getContractCode` at the address returned source identical to repository `evidence_watch.py` after normalization of CRLF to LF. SHA-256 of the normalized source and repository file: `d2d7ff1c2f6ffaff796b7f8f544d38a8deedab629846e1d0cebf2ba6921e6571`. This establishes source identity at audit time, not future immutability of a resettable preview.
 - SDK `getContractSchema` returned all the methods below with matching parameter order, mutability and top-level return types. Nested dictionary shapes are derived from the matched source and confirmed for the observed test source; not every branch has been independently exercised.
 - Public `get_source_count()` returned 1. Public source ID `grant-rules` was obtained from the calldata of published transaction `0x47d46d6992d6e8be74e95ca58faf3dec0ac75e84eccdd78f72754176808ec812`; all six remaining view calls succeeded with that ID. `get_version_count` returned 2; `get_integration_status` reported ACTIVE, latest status MATERIAL_CHANGE, version 2. This does not constitute a new transaction, or proof of every feature branch.
@@ -57,7 +68,7 @@ The supplied mandatory first-phase instructions require inspecting `docs/ARCHITE
 ## References
 
 - Repository: https://github.com/MIKI4222/evidence-watch-genlayer
-- Explorer: https://explorer-studio-next.genlayer.com/address/0x402af6154B9D64635e2c32FEB9f07D4A492532F4
+- Historical explorer: https://explorer-studio-next.genlayer.com/address/0x402af6154B9D64635e2c32FEB9f07D4A492532F4
 - SDK: https://docs.genlayer.com/api-references/genlayer-js
 - Network and migration: https://docs.genlayer.com/developers/consensus-v06-migration
 

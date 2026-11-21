@@ -4,7 +4,7 @@ A Vite/React/TypeScript client for the existing EvidenceWatch intelligent contra
 
 ## Status
 
-**Development build, not production-verified.** Public reads against the specified deployed contract and a fee-estimation simulation have been exercised. Wallet submission, real writes, finalization tracking in this UI, all classification paths, and an actual Netlify deployment have not been tested end to end. Review `docs/CONTRACT_AUDIT.md` and `docs/LIMITATIONS.md` before use. Original repository documentation/tests are unavailable; the user reported tests were conducted in Studio, but those tests were not independently reproduced.
+**Development build, not production-verified.** A read-only check of the current deployment returned its schema and source count. Earlier detailed public reads and a fee-estimation simulation were performed against a previous deployment, not this one. Wallet submission, real writes, finalization tracking in this UI, all classification paths, and an actual Netlify deployment have not been tested end to end. Review `docs/CONTRACT_AUDIT.md` and `docs/LIMITATIONS.md` before use. Original repository documentation/tests are unavailable; the user reported tests were conducted in Studio, but those tests were not independently reproduced.
 
 ## Run locally
 
@@ -14,7 +14,7 @@ cp .env.example .env   # optional; defaults are the requested deployment
 npm run dev
 ```
 
-Open the local URL printed by Vite. Public reads work without a wallet. To look up an existing source, enter its exact ID. `grant-rules` was observed on the public deployment during audit, though Studio Dev can reset.
+Open the local URL printed by Vite. Public reads work without a wallet. To look up an existing source, enter its exact ID. `grant-rules` was observed on a previous deployment and may not exist on the current deployment. Studio Dev can reset.
 
 ```sh
 npm run test
@@ -25,7 +25,7 @@ npm run preview
 
 ## Network and configuration
 
-Studio Dev: chain ID `61997`, RPC `https://studio-dev.genlayer.com/api`, currency GEN. The SDK `studioDevnet` preset is pinned to `genlayer-js@2.0.0-rc.3`. The contract defaults to `0x402af6154B9D64635e2c32FEB9f07D4A492532F4`. The only configurable public environment variables are in `.env.example`. The chain/RPC are intentionally not configurable separately from the SDK preset, to prevent an inconsistent consensus deployment. Do not put secrets or private keys in Vite variables.
+Studio Dev: chain ID `61997`, RPC `https://studio-dev.genlayer.com/api`, currency GEN. The SDK `studioDevnet` preset is pinned to `genlayer-js@2.0.0-rc.3`. The contract defaults to `0xe377EBA9359CA71Ad64D4BB65e5BC0Ff897aC3D8`. The only configurable public environment variables are in `.env.example`. The chain/RPC are intentionally not configurable separately from the SDK preset, to prevent an inconsistent consensus deployment. An explicitly configured `VITE_GENLAYER_CONTRACT_ADDRESS` overrides the fallback. If set in Netlify, update it to the intended address or remove it, then trigger a new build. Do not put secrets or private keys in Vite variables.
 
 ## Netlify
 

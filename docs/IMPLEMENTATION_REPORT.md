@@ -1,5 +1,8 @@
 # Implementation report
 
+> Historical implementation report: live reads, fee simulation and browser observations below refer to the earlier deployment, not the current deployment. For current address and read-only checks, see [Contract audit](CONTRACT_AUDIT.md).
+
+
 ## Implemented
 
 React/Vite/TypeScript SPA with overview, source lookup and registration wizard, source detail, baseline and latest record, check flow, bounded history, per-record investigation, integrations, methodology, documentation, settings and transaction tracking. It targets the existing contract using GenLayerJS 2.0.0-rc.3 on Studio Dev 61997. Write code prepares an SDK fee simulation, requires a connected wallet and correct chain, and stores a returned transaction hash for tracking. The UI requires finalized status plus successful execution before claiming success.
